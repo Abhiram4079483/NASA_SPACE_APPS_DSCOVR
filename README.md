@@ -33,9 +33,15 @@ After rechecking for any errors, we converted them to the neccessary form (numpy
 ### Model 
 We opted to use a RNN network with LSTM layers to capture the time series nature of data.
 Initially we opted to use a regression based approach to predict Kp values of the window.
+We used Root Mean Squared Error Loss and Adam's Optimizer.We train the model with 250 epochs and recieved rmse of 0.1647. However the results were not good enough as there are a lot of false negatives. This is because the data consists of lot of datapoints which are below 5 thus the model being more prone to predicting a value less than 5.
+On later trials we tried to use Binary classification on the presence of solar storm.Here too we have a huge discrepancy with the number of samples for solar storm occuring, so we implemented a custom loss function which extends BinaryCrossEntropy by adding a weight(>1) to the false Negative predictions.This avoids the model from thinking it is better to predict anything as less than 5.
 
+The custom loss function formula is:
+$$loss=-((1-y_{true})*log(1-y_{pred})+ c*y_{true}*log(y_{pred})) \:\:\:\:\:\:  Where \:\: c>=1$$ 
+### Predicting 
+After training the model we used the X_test to predict the existence of solar storm.In case of regression we chose 5 to be the threshold as notified by various sources.
 
+## Future Scope
+The learning of the model gets saturated a lot which indicates that the model may not be complex enough to understand the underlying patterns in the data.Also the loss function needs some additional experimentation to get the optimal c value.Additionally other methods such as synthetic data generation can be explored to resolve the bias issue.
 
-
-
-CSV FILES THAT CONTAIN THE DATA THAT WE USED FOR THIS CHALLENGE ARE UPLOADED HERE - [https://drive.google.com/drive/folders/1UyHzZlMd01r27uyxbUwXNydsIxT0F1fN?usp=sharing]
+### CSV FILES THAT CONTAIN THE DATA THAT WE USED FOR THIS CHALLENGE ARE UPLOADED HERE - [https://drive.google.com/drive/folders/1UyHzZlMd01r27uyxbUwXNydsIxT0F1fN?usp=sharing]
