@@ -49,4 +49,10 @@ After training the model we used the X_test to predict the existence of solar st
 - Also the loss function needs some additional experimentation to get the optimal c value.
 - Additionally other methods such as synthetic data generation can be explored to resolve the bias issue.
 
+## Using/Running the Project
+- Clone our project using command 
+`git clone 'repo-url'`
+- Install the data required from the drive(contains csv files)
+- Run the blocks of code starting with a `--RUN--` comment
+- Blocks which can be run but are unnecesary will be marked by `--Choice--` comment
 ### CSV FILES THAT CONTAIN THE DATA THAT WE USED FOR THIS CHALLENGE ARE UPLOADED HERE - [https://drive.google.com/drive/folders/1UyHzZlMd01r27uyxbUwXNydsIxT0F1fN?usp=sharing]
