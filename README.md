@@ -37,7 +37,10 @@ We used Root Mean Squared Error Loss and Adam's Optimizer.We train the model wit
 On later trials we tried to use Binary classification on the presence of solar storm.Here too we have a huge discrepancy with the number of samples for solar storm occuring, so we implemented a custom loss function which extends BinaryCrossEntropy by adding a weight(>1) to the false Negative predictions.This avoids the model from thinking it is better to predict anything as less than 5.
 
 The custom loss function formula is:
-$$loss=-((1-y_{true})*log(1-y_{pred})+ c*y_{true}*log(y_{pred})) \:\:\:\:\:\:  Where \:\: c>=1$$ 
+
+$``loss=-((1-y_{true})*log(1-y_{pred})+ c*y_{true}*log(y_{pred})) \:\:\:\:\:\:  Where \:\: c>=1``$
+
+
 ### Predicting 
 After training the model we used the X_test to predict the existence of solar storm.In case of regression we chose 5 to be the threshold as notified by various sources.
 
