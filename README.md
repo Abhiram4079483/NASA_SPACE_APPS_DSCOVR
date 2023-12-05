@@ -17,7 +17,24 @@ Using the raw data from DSCOVR—faults and all—to predict geomagnetic storms 
 We used the resources available on the Problem Statement page to gather raw PlasMAG data from DSCOVR. The data can be found [here](https://www.spaceappschallenge.org/develop-the-oracle-of-dscovr-experimental-data-repository/) on an yearly basis.
 To predict the solar storms we decided on using Kp values, which quantifies disturbances in the horizontal component of Earth's magnetic field with an integer in the range 0–9 with 1 being calm and 5 or more indicating a geomagnetic storm.It is derived from the maximum fluctuations of horizontal components observed on a magnetometer during a three-hour interval.The data for the Kp values can be found [here](https://www.gfz-potsdam.de/en/section/geomagnetism/data-products-services/geomagnetic-kp-index). 
 Using this we found the Kp and Ap values since 1932. We scraped this data and filtered out the required portions using Python. We converted this to csv which can be found in the drive attached at the end.
+### Scrapped Approaches
+Prior to finding the Kp values of the data,
 ### Pre-Processing The Data
+We firstly loaded the data as required and observed that a lot of values were NaN, especially at the extremity columns of the dataset.We also noticed that the kp values are determined every 3 hours and 3 minutes, which is equivalent to 183 minutes. Our strategy is to use the entire set of 183 data points to predict the kp value for that specific time period. This approach helps mitigate the impact of potential errors in the data due to sensitivity loss. By utilizing the complete set of data points, any errors in individual data points are balanced out by the overall window, allowing the model to better ignore the anomalies and improve its learning process.
+
+In this process not all windows might have enough information, and interpolation could lead to distortion of data. Thus we discussed and settled on a threshold- If there are more than 8 columns who have more than 2 NaN values then we drop the window.
+
+
+We experimented with different interpolation methods, including polynomial and linear techniques. Ultimately, we opted for a combination of the Window Mean and Gaussian Noise for each column because we can avoid the model learning something wrong.This filtered and interpolated data is saved as csv in the Filtered_Interpolation.csv in the drive attached at the end.
+### Generating train and test datasets
+In the merged CSV file, we extracted the Kp values, which were attached to the beginning of each window. We then divided the dataset into respective windows. However, we observed that the time difference between Kp values is not consistently 183 for all windows. Towards the end of the dataset, particularly where the time difference is around 159 instead of 183, we addressed this by randomly reusing some of the data points within the same window to ensure proper padding.Using this we generated X and y for our model.
+
+After rechecking for any errors, we converted them to the neccessary form (numpy array or pandas df) accordingly.We then used MinMaxScaler to scale the X dataset. We then split the dataset for train and test respectively.
+### Model 
+We opted to use a RNN network with LSTM layers to capture the time series nature of data.
+Initially we opted to use a regression based approach to predict Kp values of the window.
+
+
 
 
 
