@@ -45,6 +45,8 @@ $``loss=-((1-y_{true})*log(1-y_{pred})+ c*y_{true}*log(y_{pred})) \:\:\:\:\:\:  
 After training the model we used the X_test to predict the existence of solar storm.In case of regression we chose 5 to be the threshold as notified by various sources.
 
 ## Future Scope
-The learning of the model gets saturated a lot which indicates that the model may not be complex enough to understand the underlying patterns in the data.Also the loss function needs some additional experimentation to get the optimal c value.Additionally other methods such as synthetic data generation can be explored to resolve the bias issue.
+- The learning of the model gets saturated a lot which indicates that the model may not be complex enough to understand the underlying patterns in the data.
+- Also the loss function needs some additional experimentation to get the optimal c value.
+- Additionally other methods such as synthetic data generation can be explored to resolve the bias issue.
 
 ### CSV FILES THAT CONTAIN THE DATA THAT WE USED FOR THIS CHALLENGE ARE UPLOADED HERE - [https://drive.google.com/drive/folders/1UyHzZlMd01r27uyxbUwXNydsIxT0F1fN?usp=sharing]
