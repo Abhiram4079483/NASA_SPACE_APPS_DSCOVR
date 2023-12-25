@@ -19,6 +19,7 @@ To predict the solar storms we decided on using Kp values, which quantifies dist
 Using this we found the Kp and Ap values since 1932. We scraped this data and filtered out the required portions using Python. We converted this to csv which can be found in the drive attached at the end.
 ### Scrapped Approaches
 Prior to finding the Kp values of the data, we assumed a gaussian approach for kp values. Kp values are generally obtained for every 3 hours. We tried to use gaussian approach assuming a peak near solar storm. A lorentzian fitting method would also work. A kp value of 5 or higher is generally considered a solar storm. However these mehtods cannot be relied for future prediction. 
+Bayesian approaches using appropriate acquisition functions was also one of our way forward.
 ### Pre-Processing The Data
 We firstly loaded the data as required and observed that a lot of values were NaN, especially at the extremity columns of the dataset.We also noticed that the kp values are determined every 3 hours and 3 minutes, which is equivalent to 183 minutes. Our strategy is to use the entire set of 183 data points to predict the kp value for that specific time period. This approach helps mitigate the impact of potential errors in the data due to sensitivity loss. By utilizing the complete set of data points, any errors in individual data points are balanced out by the overall window, allowing the model to better ignore the anomalies and improve its learning process.
 
